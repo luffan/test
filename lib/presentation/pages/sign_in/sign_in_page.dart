@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:profile/presentation/constants/dimens.dart';
-import 'package:profile/presentation/constants/font.dart';
 import 'package:profile/presentation/constants/strings.dart';
 import 'package:profile/presentation/constants/styles.dart';
 import 'package:profile/presentation/pages/sign_in/sign_in_controller.dart';
 import 'package:profile/presentation/widgets/application_app_bar.dart';
 import 'package:profile/presentation/widgets/app_button.dart';
 import 'package:profile/presentation/widgets/app_text_field.dart';
+import 'package:profile/presentation/widgets/navigate_label.dart';
+import 'package:profile/presentation/widgets/social_network.dart';
 
 import '../../theme/theme_extensions.dart';
 
@@ -29,7 +30,8 @@ class SignInPage extends GetView<SignInController> {
               padding: const EdgeInsets.all(Dimens.defaultContentPadding),
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: Dimens.defaultHorizontalMargin),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8, horizontal: Dimens.defaultHorizontalMargin),
                   child: Image.asset('assets/images/sign_in.png', height: 150),
                 ),
                 AppTextField(hintText: Strings.username),
@@ -54,63 +56,18 @@ class SignInPage extends GetView<SignInController> {
                 _verticalSpace(),
                 Center(child: Text(Strings.or, style: AppTextStyle.primaryBoldText(theme))),
                 _verticalSpace(),
-                _socialNetworks(),
+                SocialNetwork(),
                 SizedBox(height: 50.0),
-                _signUp(),
+                NavigateLabel(
+                  content: Strings.dontHaveAccount,
+                  navigate: controller.goToSignUp,
+                  navigateText: Strings.signUp,
+                ),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _socialNetworks() {
-    return Row(
-      children: [
-        _socialNetworkButton(onClick: () {}, asset: 'assets/images/facebook.png'),
-        SizedBox(width: 8),
-        _socialNetworkButton(onClick: () {}, asset: 'assets/images/twitter.png'),
-        SizedBox(width: 8),
-        _socialNetworkButton(onClick: () {}, asset: 'assets/images/linked_in.png'),
-      ],
-    );
-  }
-
-  Widget _socialNetworkButton({required void Function() onClick, required String asset}) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(border: Border.all(color: theme.borderColor)),
-        child: AppButton(
-          onClick: onClick,
-          child: Image.asset(asset, height: 20),
-        ),
-      ),
-    );
-  }
-
-  Widget _signUp() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          Strings.dontHaveAccount,
-          style: TextStyle(color: theme.primaryTextColor, fontSize: FontSize.fontSizeM),
-        ),
-        SizedBox(width: 4),
-        GestureDetector(
-          onTap: controller.goToSignUp,
-          child: Text(
-            Strings.signUp,
-            style: TextStyle(
-              color: theme.accentColor,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w900,
-              fontSize: FontSize.fontSizeM,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
