@@ -23,6 +23,6 @@ class ProfileApp extends StatelessWidget {
   List<GetPage> get _pages => [
         GetPage(name: '/signIn', page: () => SignInPage()),
         GetPage(name: '/signUp', page: () => SignUpPage()),
-        GetPage(name: '/profile', page: () => ProfilePage()),
+        GetPage(name: '/profile/:user', page: () => ProfilePage()),
       ];
 }

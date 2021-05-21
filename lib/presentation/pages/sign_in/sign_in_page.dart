@@ -38,9 +38,13 @@ class SignInPage extends GetView<SignInController> {
                 ),
                 AppTextField(
                   hintText: Strings.username,
+                  controller: controller.usernameTextEditingController,
                 ),
                 _verticalSpace(),
-                AppTextField(hintText: Strings.password),
+                AppTextField(
+                  hintText: Strings.password,
+                  controller: controller.passwordTextEditingController,
+                ),
                 _verticalSpace(),
                 Align(
                   alignment: Alignment.centerRight,

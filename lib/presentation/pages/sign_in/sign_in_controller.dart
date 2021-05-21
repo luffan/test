@@ -12,7 +12,7 @@ class SignInController extends GetxController {
   void signIn() async {
     final errorMessage = await checkFields();
     if (errorMessage.isEmpty) {
-      Get.toNamed('/profile');
+      Get.toNamed('/profile/${usernameTextEditingController.text}');
     } else {
       Get.defaultDialog(
         title: "Error",
@@ -28,10 +28,9 @@ class SignInController extends GetxController {
     if (username.isEmpty) {
       return false;
     }
-
-    final prefUsername = await _preference.getUsername();
-
-    return prefUsername == username;
+    //final prefUsername = await _preference.getUsername();
+    //return prefUsername == username;
+    return true;
   }
 
   Future<bool> _validatePassword(String password) async {

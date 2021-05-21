@@ -6,9 +6,11 @@ import '../theme/theme_extensions.dart';
 class AppTextField extends StatelessWidget {
 
   final String? hintText;
+  final TextEditingController controller;
 
   AppTextField({
     this.hintText,
+    required this.controller,
   });
 
   @override
@@ -19,6 +21,7 @@ class AppTextField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       color: theme.textFieldBackgroundColor,
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,

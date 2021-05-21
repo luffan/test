@@ -37,13 +37,25 @@ class SignUpPage extends GetView<SignUpController> {
               children: <Widget>[
                 Image.asset('assets/images/sign_up.png', height: 141),
                 SizedBox(height: 48),
-                AppTextField(hintText: Strings.enterEmail),
+                AppTextField(
+                  hintText: Strings.enterEmail,
+                  controller: controller.emailTextEditingController,
+                ),
                 _verticalSpace(),
-                AppTextField(hintText: Strings.enterPassword),
+                AppTextField(
+                  hintText: Strings.enterPassword,
+                  controller: controller.passwordTextEditingController,
+                ),
                 _verticalSpace(),
-                AppTextField(hintText: Strings.confirmPassword),
+                AppTextField(
+                  hintText: Strings.confirmPassword,
+                  controller: controller.confirmPasswordTextEditingController,
+                ),
                 _verticalSpace(),
-                AppButton.filledText(onClick: () {}, text: Strings.login),
+                AppButton.filledText(
+                  onClick: controller.signUp,
+                  text: Strings.login,
+                ),
                 _verticalSpace(),
                 Center(
                   child: Text(Strings.or, style: AppTextStyle.primaryBoldText(theme)),
