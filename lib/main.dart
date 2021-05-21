@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profile/di/app_binding.dart';
+import 'package:profile/presentation/pages/profile/profile_page.dart';
 
 import 'presentation/pages/sign_in/sign_in_page.dart';
 import 'presentation/pages/sign_up/sign_up_page.dart';
@@ -22,5 +23,6 @@ class ProfileApp extends StatelessWidget {
   List<GetPage> get _pages => [
         GetPage(name: '/signIn', page: () => SignInPage()),
         GetPage(name: '/signUp', page: () => SignUpPage()),
+        GetPage(name: '/profile', page: () => ProfilePage()),
       ];
 }

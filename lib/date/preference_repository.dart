@@ -9,24 +9,24 @@ class PreferenceRepository {
     return await SharedPreferences.getInstance();
   }
 
-  Future<void> saveUsername(String username) {
-    return _prefs.then((prefs) => prefs.setString(_username, username));
+  void saveUsername(String username) {
+    _prefs.then((prefs) => prefs.setString(_username, username));
   }
 
   Future<String> getUsername() {
     return _prefs.then((prefs) => prefs.getString(_username) ?? '');
   }
 
-  Future<void> savePassword(String password) {
-    return _prefs.then((prefs) => prefs.setString(_password, password));
+  void savePassword(String password) {
+    _prefs.then((prefs) => prefs.setString(_password, password));
   }
 
   Future<String> getPassword() {
     return _prefs.then((prefs) => prefs.getString(_password) ?? '');
   }
 
-  Future<void> saveEmail(String email) {
-    return _prefs.then((prefs) => prefs.setString(_email, email));
+  void saveEmail(String email) {
+    _prefs.then((prefs) => prefs.setString(_email, email));
   }
 
   Future<String> getEmail() {

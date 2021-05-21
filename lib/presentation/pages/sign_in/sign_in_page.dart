@@ -30,17 +30,14 @@ class SignInPage extends GetView<SignInController> {
               padding: const EdgeInsets.all(Dimens.defaultContentPadding),
               children: [
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: Dimens.defaultHorizontalMargin),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: Dimens.defaultHorizontalMargin,
+                  ),
                   child: Image.asset('assets/images/sign_in.png', height: 150),
                 ),
                 AppTextField(
                   hintText: Strings.username,
-                  validator: (username) {
-                    if (username == null || username.isEmpty) {
-                      return null;
-                    }
-                  },
                 ),
                 _verticalSpace(),
                 AppTextField(hintText: Strings.password),
@@ -59,7 +56,10 @@ class SignInPage extends GetView<SignInController> {
                   ),
                 ),
                 SizedBox(height: 50.0),
-                AppButton.filledText(onClick: controller.signIn, text: Strings.signIn),
+                AppButton.filledText(
+                  onClick: controller.signIn,
+                  text: Strings.signIn,
+                ),
                 _verticalSpace(),
                 Center(child: Text(Strings.or, style: AppTextStyle.primaryBoldText(theme))),
                 _verticalSpace(),
