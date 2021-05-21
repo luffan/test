@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:profile/presentation/constants/dimens.dart';
-import 'package:profile/presentation/constants/font.dart';
 import 'package:profile/presentation/constants/strings.dart';
 import 'package:profile/presentation/constants/styles.dart';
 import 'package:profile/presentation/pages/sign_up/sign_up_controller.dart';

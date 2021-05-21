@@ -6,9 +6,11 @@ import '../theme/theme_extensions.dart';
 class AppTextField extends StatelessWidget {
 
   final String? hintText;
+  final String? Function(String?)? validator;
 
   AppTextField({
     this.hintText,
+    this.validator,
   });
 
   @override
@@ -18,7 +20,8 @@ class AppTextField extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 20),
       color: theme.textFieldBackgroundColor,
-      child: TextField(
+      child: TextFormField(
+        validator: validator,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,

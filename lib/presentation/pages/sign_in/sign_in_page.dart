@@ -34,7 +34,14 @@ class SignInPage extends GetView<SignInController> {
                       EdgeInsets.symmetric(vertical: 8, horizontal: Dimens.defaultHorizontalMargin),
                   child: Image.asset('assets/images/sign_in.png', height: 150),
                 ),
-                AppTextField(hintText: Strings.username),
+                AppTextField(
+                  hintText: Strings.username,
+                  validator: (username) {
+                    if (username == null || username.isEmpty) {
+                      return null;
+                    }
+                  },
+                ),
                 _verticalSpace(),
                 AppTextField(hintText: Strings.password),
                 _verticalSpace(),

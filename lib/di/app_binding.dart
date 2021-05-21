@@ -1,11 +1,16 @@
 import 'package:get/get.dart';
+import 'package:profile/date/preference_repository.dart';
 import 'package:profile/presentation/pages/sign_in/sign_in_controller.dart';
 import 'package:profile/presentation/pages/sign_up/sign_up_controller.dart';
 
 class AppBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<SignInController>(SignInController());
-    Get.put<SignUpController>(SignUpController());
+    // Repositories
+    Get.put<PreferenceRepository>(PreferenceRepository());
+
+    // Controllers
+    Get.put<SignInController>(SignInController(Get.find<PreferenceRepository>()));
+    Get.put<SignUpController>(SignUpController(Get.find<PreferenceRepository>()));
   }
 }
