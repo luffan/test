@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:profile/date/preference_repository.dart';
+import 'package:profile/presentation/pages/profile/profile_controller.dart';
 
 class SignInController extends GetxController {
   PreferenceRepository _preference;
@@ -12,14 +13,14 @@ class SignInController extends GetxController {
   void signIn() async {
     final errorMessage = await checkFields();
     if (errorMessage.isEmpty) {
-      Get.toNamed('/profile/${usernameTextEditingController.text}');
+      Get.find<ProfileController>().loadedEmail();
+      Get.offNamed('/profile');
     } else {
       Get.defaultDialog(
         title: "Error",
         middleText: errorMessage,
       );
     }
-
   }
 
   void goToSignUp() => Get.toNamed('/signUp');
@@ -28,8 +29,6 @@ class SignInController extends GetxController {
     if (username.isEmpty) {
       return false;
     }
-    //final prefUsername = await _preference.getUsername();
-    //return prefUsername == username;
     return true;
   }
 
@@ -52,6 +51,10 @@ class SignInController extends GetxController {
     return errorMessage;
   }
 
-
-
+  @override
+  void dispose() {
+    usernameTextEditingController.dispose();
+    passwordTextEditingController.dispose();
+    super.dispose();
+  }
 }

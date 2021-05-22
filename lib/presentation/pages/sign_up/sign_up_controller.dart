@@ -34,13 +34,21 @@ class SignUpController extends GetxController {
   String checkFields() {
     var errorMessage = '';
     if (_validateField(emailTextEditingController.text))
-      errorMessage += 'There is no such user name\n';
+      errorMessage += 'There is no such user name. ';
     if (_validateField(passwordTextEditingController.text))
-      errorMessage += 'Invalid password\n';
+      errorMessage += 'Invalid password. ';
     if (_validateField(confirmPasswordTextEditingController.text))
-      errorMessage += 'Invalid confirm password\n';
+      errorMessage += 'Invalid confirm password. ';
     if (passwordTextEditingController.text != confirmPasswordTextEditingController.text)
-      errorMessage += 'Passwords don\'t match';
+      errorMessage += 'Passwords don\'t match. ';
     return errorMessage;
+  }
+
+  @override
+  void dispose() {
+    emailTextEditingController.dispose();
+    passwordTextEditingController.dispose();
+    confirmPasswordTextEditingController.dispose();
+    super.dispose();
   }
 }

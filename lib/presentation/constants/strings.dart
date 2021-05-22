@@ -18,4 +18,6 @@ abstract class Strings {
   static const String email = 'Email';
   static const String edit = 'Edit';
   static const String completedProjects = 'Completed projects';
+  static const String exampleCity = 'New York';
+  static const String exampleID = 'ID: 1120611';
 }

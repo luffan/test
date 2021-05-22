@@ -5,6 +5,7 @@ import 'package:profile/presentation/constants/dimens.dart';
 import 'package:profile/presentation/constants/strings.dart';
 import 'package:profile/presentation/constants/styles.dart';
 import 'package:profile/presentation/pages/sign_up/sign_up_controller.dart';
+import 'package:profile/presentation/pages/utils/support_function.dart';
 import 'package:profile/presentation/widgets/app_button.dart';
 import 'package:profile/presentation/widgets/application_app_bar.dart';
 import 'package:profile/presentation/widgets/app_text_field.dart';
@@ -28,7 +29,12 @@ class SignUpPage extends GetView<SignUpController> {
               onPressed: Get.back,
             ),
             title: Strings.signUp,
-            actions: [Icon(Icons.menu, color: theme.primaryTextColor)],
+            actions: [
+              Icon(
+                Icons.menu,
+                color: theme.primaryTextColor,
+              )
+            ],
           ),
           Expanded(
             child: ListView(
@@ -36,33 +42,36 @@ class SignUpPage extends GetView<SignUpController> {
               padding: const EdgeInsets.all(Dimens.defaultContentPadding),
               children: <Widget>[
                 Image.asset('assets/images/sign_up.png', height: 141),
-                SizedBox(height: 48),
+                largeVerticalSpace(),
                 AppTextField(
                   hintText: Strings.enterEmail,
                   controller: controller.emailTextEditingController,
                 ),
-                _verticalSpace(),
+                defaultVerticalSpace(),
                 AppTextField(
                   hintText: Strings.enterPassword,
                   controller: controller.passwordTextEditingController,
                 ),
-                _verticalSpace(),
+                defaultVerticalSpace(),
                 AppTextField(
                   hintText: Strings.confirmPassword,
                   controller: controller.confirmPasswordTextEditingController,
                 ),
-                _verticalSpace(),
+                defaultVerticalSpace(),
                 AppButton.filledText(
                   onClick: controller.signUp,
                   text: Strings.login,
                 ),
-                _verticalSpace(),
+                defaultVerticalSpace(),
                 Center(
-                  child: Text(Strings.or, style: AppTextStyle.primaryBoldText(theme)),
+                  child: Text(
+                    Strings.or,
+                    style: AppTextStyle.primaryBoldText(theme),
+                  ),
                 ),
-                _verticalSpace(),
+                defaultVerticalSpace(),
                 SocialNetwork(),
-                SizedBox(height: 50.0),
+                largeVerticalSpace(),
                 NavigateLabel(
                   content: Strings.alreadyHaveAccount,
                   navigate: controller.goToSignIn,
@@ -75,6 +84,4 @@ class SignUpPage extends GetView<SignUpController> {
       ),
     );
   }
-
-  Widget _verticalSpace() => SizedBox(height: Dimens.defaultVerticalMargin);
 }

@@ -5,13 +5,13 @@ import 'package:profile/presentation/constants/dimens.dart';
 import 'package:profile/presentation/constants/font.dart';
 import 'package:profile/presentation/constants/strings.dart';
 import 'package:profile/presentation/constants/styles.dart';
+import 'package:profile/presentation/pages/profile/profile_controller.dart';
+import 'package:profile/presentation/pages/utils/support_function.dart';
 import 'package:profile/presentation/widgets/app_button.dart';
 import 'package:profile/presentation/widgets/application_app_bar.dart';
 import '../../theme/theme_extensions.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
+class ProfilePage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +36,8 @@ class ProfilePage extends StatelessWidget {
                 _address(),
                 _editLabel(),
                 _clickButtons(),
-                SizedBox(height: 50),
-                _additionalData(),
+                largeVerticalSpace(),
+                _additionalProfileData(),
               ],
             ),
           ),
@@ -51,7 +51,7 @@ class ProfilePage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 17, bottom: 24),
         child: Text(
-          'Edit',
+          Strings.edit,
           style: TextStyle(
             color: theme.accentColor,
             decoration: TextDecoration.underline,
@@ -67,11 +67,14 @@ class ProfilePage extends StatelessWidget {
     return Column(
       children: <Widget>[
         ClipOval(
-          child: Image.asset('assets/images/avatar.png', height: 114),
+          child: Image.asset(
+            'assets/images/avatar.png',
+            height: 114,
+          ),
         ),
         SizedBox(height: 22),
         Text(
-          Get.parameters['user'] ?? 'username',
+          controller.username,
           style: TextStyle(
             color: theme.primaryTextColor,
             fontSize: FontSize.fontSizeXL,
@@ -89,7 +92,7 @@ class ProfilePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'New York',
+            Strings.exampleCity,
             style: TextStyle(
               color: theme.secondaryTextColor,
               fontWeight: FontWeight.w500,
@@ -100,11 +103,11 @@ class ProfilePage extends StatelessWidget {
             child: Icon(
               Icons.circle,
               size: 6,
-              color: const Color(0xFFB5C3C7),
+              color: colorDividerCircle,
             ),
           ),
           Text(
-            'ID: 1120611',
+            Strings.exampleID,
             style: TextStyle(
               color: theme.secondaryTextColor,
               fontWeight: FontWeight.w500,
@@ -126,14 +129,19 @@ class ProfilePage extends StatelessWidget {
               onPressed: () {},
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 22),
-                child: Text(Strings.aboutMe),
+                child: Text(
+                  Strings.aboutMe,
+                  style: AppTextStyle.primaryBoldText(theme).copyWith(
+                    color: theme.secondaryTextColor,
+                  ),
+                ),
               ),
             ),
           ),
           SizedBox(width: 15),
           Expanded(
             child: AppButton.filledText(
-              onClick: () {},
+              onClick: controller.logOut,
               text: Strings.logOut,
             ),
           )
@@ -177,15 +185,16 @@ class ProfilePage extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    color: color,
+                    color: colorCardTitleText,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(height: 2),
                 Text(
                   content,
-                  style:
-                      AppTextStyle.primaryBoldText(theme).copyWith(color: theme.onButtonTextColor),
+                  style: AppTextStyle.primaryBoldText(theme).copyWith(
+                    color: theme.onButtonTextColor,
+                  ),
                 ),
               ],
             ),
@@ -195,32 +204,34 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _additionalData() {
+  Widget _additionalProfileData() {
     return Container(
       color: theme.primaryTextColor,
       padding: EdgeInsets.symmetric(vertical: 40),
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: EdgeInsets.symmetric(horizontal: Dimens.defaultContentPadding),
             child: _card(
               leading: Icons.phone,
               title: Strings.phoneNumber,
               content: '+375292756392',
             ),
           ),
-          SizedBox(height: 16),
+          defaultVerticalSpace(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: _card(
-              leading: Icons.mail,
-              title: Strings.email,
-              content: 'mihalkovgleb@gmail.com',
+            padding: EdgeInsets.symmetric(horizontal: Dimens.defaultContentPadding),
+            child: Obx(
+              () => _card(
+                leading: Icons.mail,
+                title: Strings.email,
+                content: controller.email.value,
+              ),
             ),
           ),
-          SizedBox(height: 16),
+          defaultVerticalSpace(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: EdgeInsets.symmetric(horizontal: Dimens.defaultContentPadding),
             child: _card(
               leading: Icons.circle,
               title: Strings.completedProjects,

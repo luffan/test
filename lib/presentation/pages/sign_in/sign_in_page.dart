@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -6,6 +5,7 @@ import 'package:profile/presentation/constants/dimens.dart';
 import 'package:profile/presentation/constants/strings.dart';
 import 'package:profile/presentation/constants/styles.dart';
 import 'package:profile/presentation/pages/sign_in/sign_in_controller.dart';
+import 'package:profile/presentation/pages/utils/support_function.dart';
 import 'package:profile/presentation/widgets/application_app_bar.dart';
 import 'package:profile/presentation/widgets/app_button.dart';
 import 'package:profile/presentation/widgets/app_text_field.dart';
@@ -22,7 +22,12 @@ class SignInPage extends GetView<SignInController> {
         children: [
           ApplicationAppBar(
             title: Strings.signIn,
-            actions: [Icon(Icons.menu, color: theme.primaryTextColor)],
+            actions: [
+              Icon(
+                Icons.menu,
+                color: theme.primaryTextColor,
+              )
+            ],
           ),
           Expanded(
             child: ListView(
@@ -34,18 +39,21 @@ class SignInPage extends GetView<SignInController> {
                     vertical: 8,
                     horizontal: Dimens.defaultHorizontalMargin,
                   ),
-                  child: Image.asset('assets/images/sign_in.png', height: 150),
+                  child: Image.asset(
+                    'assets/images/sign_in.png',
+                    height: 150,
+                  ),
                 ),
                 AppTextField(
                   hintText: Strings.username,
                   controller: controller.usernameTextEditingController,
                 ),
-                _verticalSpace(),
+                defaultVerticalSpace(),
                 AppTextField(
                   hintText: Strings.password,
                   controller: controller.passwordTextEditingController,
                 ),
-                _verticalSpace(),
+                defaultVerticalSpace(),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -59,16 +67,21 @@ class SignInPage extends GetView<SignInController> {
                     ),
                   ),
                 ),
-                SizedBox(height: 50.0),
+                largeVerticalSpace(),
                 AppButton.filledText(
                   onClick: controller.signIn,
                   text: Strings.signIn,
                 ),
-                _verticalSpace(),
-                Center(child: Text(Strings.or, style: AppTextStyle.primaryBoldText(theme))),
-                _verticalSpace(),
+                defaultVerticalSpace(),
+                Center(
+                  child: Text(
+                    Strings.or,
+                    style: AppTextStyle.primaryBoldText(theme),
+                  ),
+                ),
+                defaultVerticalSpace(),
                 SocialNetwork(),
-                SizedBox(height: 50.0),
+                largeVerticalSpace(),
                 NavigateLabel(
                   content: Strings.dontHaveAccount,
                   navigate: controller.goToSignUp,
@@ -81,6 +94,4 @@ class SignInPage extends GetView<SignInController> {
       ),
     );
   }
-
-  Widget _verticalSpace() => SizedBox(height: Dimens.defaultVerticalMargin);
 }

@@ -7,4 +7,5 @@ const Color colorLight = Color(0xFFF7F7F7);
 const Color colorGreen = Color(0xFF20C3AF);
 const Color colorBorder = Color(0xFFE2E2E0);
 const Color colorOrange = Color(0xFFFFB19D);
-const Color color = Color(0xFFECECEB);
+const Color colorCardTitleText = Color(0xFFECECEB);
+const Color colorDividerCircle = Color(0xFFB5C3C7);
