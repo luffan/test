@@ -23,10 +23,15 @@ class ProfilePage extends GetView<ProfileController> {
                 Icons.chevron_left,
                 color: theme.primaryTextColor,
               ),
-              onPressed: Get.back,
+              onPressed: controller.logOut,
             ),
             title: '',
-            actions: [Icon(Icons.menu, color: theme.primaryTextColor)],
+            actions: [
+              Icon(
+                Icons.menu,
+                color: theme.primaryTextColor,
+              )
+            ],
           ),
           Expanded(
             child: ListView(
@@ -52,11 +57,9 @@ class ProfilePage extends GetView<ProfileController> {
         padding: const EdgeInsets.only(top: 17, bottom: 24),
         child: Text(
           Strings.edit,
-          style: TextStyle(
+          style: AppTextStyle.primaryBoldText(theme).copyWith(
             color: theme.accentColor,
             decoration: TextDecoration.underline,
-            fontWeight: FontWeight.w900,
-            fontSize: FontSize.fontSizeM,
           ),
         ),
       ),
@@ -75,10 +78,8 @@ class ProfilePage extends GetView<ProfileController> {
         SizedBox(height: 22),
         Text(
           controller.username,
-          style: TextStyle(
-            color: theme.primaryTextColor,
+          style: AppTextStyle.primaryText(theme).copyWith(
             fontSize: FontSize.fontSizeXL,
-            fontWeight: FontWeight.w500,
           ),
         ),
       ],
@@ -93,9 +94,8 @@ class ProfilePage extends GetView<ProfileController> {
         children: <Widget>[
           Text(
             Strings.exampleCity,
-            style: TextStyle(
+            style: AppTextStyle.primaryText(theme).copyWith(
               color: theme.secondaryTextColor,
-              fontWeight: FontWeight.w500,
             ),
           ),
           Padding(
@@ -108,9 +108,8 @@ class ProfilePage extends GetView<ProfileController> {
           ),
           Text(
             Strings.exampleID,
-            style: TextStyle(
+            style: AppTextStyle.primaryText(theme).copyWith(
               color: theme.secondaryTextColor,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ],
@@ -160,7 +159,6 @@ class ProfilePage extends GetView<ProfileController> {
         color: Colors.transparent,
         border: Border.all(
           color: theme.secondaryTextColor,
-          width: 2,
         ),
       ),
       child: Padding(
@@ -184,9 +182,8 @@ class ProfilePage extends GetView<ProfileController> {
               children: <Widget>[
                 Text(
                   title,
-                  style: TextStyle(
+                  style: AppTextStyle.primaryText(theme).copyWith(
                     color: colorCardTitleText,
-                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(height: 2),
@@ -215,7 +212,7 @@ class ProfilePage extends GetView<ProfileController> {
             child: _card(
               leading: Icons.phone,
               title: Strings.phoneNumber,
-              content: '+375292756392',
+              content: Strings.examplePhoneNumber,
             ),
           ),
           defaultVerticalSpace(),
@@ -235,7 +232,7 @@ class ProfilePage extends GetView<ProfileController> {
             child: _card(
               leading: Icons.circle,
               title: Strings.completedProjects,
-              content: '10',
+              content: Strings.exampleCountCompletedProject,
             ),
           ),
         ],

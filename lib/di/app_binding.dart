@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:profile/date/preference_repository.dart';
+import 'package:profile/data/preference_repository.dart';
 import 'package:profile/presentation/pages/profile/profile_controller.dart';
 import 'package:profile/presentation/pages/sign_in/sign_in_controller.dart';
 import 'package:profile/presentation/pages/sign_up/sign_up_controller.dart';

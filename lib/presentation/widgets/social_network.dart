@@ -19,10 +19,17 @@ class SocialNetwork extends StatelessWidget {
     );
   }
 
-  Widget _socialNetworkButton({required void Function() onClick, required String asset}) {
+  Widget _socialNetworkButton({
+    required void Function() onClick,
+    required String asset,
+  }) {
     return Expanded(
       child: Container(
-        decoration: BoxDecoration(border: Border.all(color: theme.borderColor)),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: theme.borderColor,
+          ),
+        ),
         child: AppButton(
           onClick: onClick,
           child: Image.asset(asset, height: 20),

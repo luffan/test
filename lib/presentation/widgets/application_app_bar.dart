@@ -24,7 +24,10 @@ class ApplicationAppBar extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(title, style: AppTextStyle.primaryBoldText(theme)),
+        title: Text(
+          title,
+          style: AppTextStyle.primaryBoldText(theme),
+        ),
         leading: leading,
         actions: actions,
       ),

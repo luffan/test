@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../theme/theme_extensions.dart';
 
 class AppTextField extends StatelessWidget {
-
   final String? hintText;
   final TextEditingController controller;
 

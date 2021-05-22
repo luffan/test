@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profile/presentation/constants/font.dart';
+import 'package:profile/presentation/constants/styles.dart';
 
 import '../theme/theme_extensions.dart';
 
@@ -22,18 +23,19 @@ class NavigateLabel extends StatelessWidget {
       children: [
         Text(
           content,
-          style: TextStyle(color: theme.primaryTextColor, fontSize: FontSize.fontSizeM),
+          style: TextStyle(
+            color: theme.primaryTextColor,
+            fontSize: FontSize.fontSizeM,
+          ),
         ),
         SizedBox(width: 4),
         GestureDetector(
           onTap: navigate,
           child: Text(
             navigateText,
-            style: TextStyle(
+            style: AppTextStyle.primaryBoldText(theme).copyWith(
               color: theme.accentColor,
               decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w900,
-              fontSize: FontSize.fontSizeM,
             ),
           ),
         ),

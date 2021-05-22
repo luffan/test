@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:profile/date/preference_repository.dart';
+import 'package:profile/data/preference_repository.dart';
 
 class SignUpController extends GetxController {
   PreferenceRepository _preference;
@@ -22,6 +22,7 @@ class SignUpController extends GetxController {
         title: "Error",
         middleText: errorMessage,
       );
+      _clearFields();
     }
   }
 
@@ -34,14 +35,19 @@ class SignUpController extends GetxController {
   String checkFields() {
     var errorMessage = '';
     if (_validateField(emailTextEditingController.text))
-      errorMessage += 'There is no such user name. ';
-    if (_validateField(passwordTextEditingController.text))
-      errorMessage += 'Invalid password. ';
+      errorMessage += 'There is no such user name.\n';
+    if (_validateField(passwordTextEditingController.text)) errorMessage += 'Invalid password.\n';
     if (_validateField(confirmPasswordTextEditingController.text))
-      errorMessage += 'Invalid confirm password. ';
+      errorMessage += 'Invalid confirm password.\n';
     if (passwordTextEditingController.text != confirmPasswordTextEditingController.text)
-      errorMessage += 'Passwords don\'t match. ';
+      errorMessage += 'Passwords don\'t match.\n';
     return errorMessage;
+  }
+
+  void _clearFields() {
+    emailTextEditingController.text = '';
+    passwordTextEditingController.text = '';
+    confirmPasswordTextEditingController.text = '';
   }
 
   @override
