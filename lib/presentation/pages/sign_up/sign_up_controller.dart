@@ -8,46 +8,31 @@ class SignUpController extends GetxController {
   final emailTextEditingController = TextEditingController();
   final passwordTextEditingController = TextEditingController();
   final confirmPasswordTextEditingController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  GlobalKey<FormState> get formKey => _formKey;
 
   SignUpController(this._preference);
 
   void signUp() {
-    final errorMessage = checkFields();
-    if (errorMessage.isEmpty) {
+    if (_formKey.currentState!.validate()) {
       _preference.saveEmail(emailTextEditingController.text);
       _preference.savePassword(passwordTextEditingController.text);
       Get.back();
-    } else {
-      Get.defaultDialog(
-        title: "Error",
-        middleText: errorMessage,
-      );
-      _clearFields();
     }
   }
 
   void goToSignIn() => Get.back();
 
-  bool _validateField(String email) {
-    return email.isEmpty;
+  bool validateField(String? field) {
+    return field != null && field.isNotEmpty;
   }
 
-  String checkFields() {
-    var errorMessage = '';
-    if (_validateField(emailTextEditingController.text))
-      errorMessage += 'There is no such user name.\n';
-    if (_validateField(passwordTextEditingController.text)) errorMessage += 'Invalid password.\n';
-    if (_validateField(confirmPasswordTextEditingController.text))
-      errorMessage += 'Invalid confirm password.\n';
-    if (passwordTextEditingController.text != confirmPasswordTextEditingController.text)
-      errorMessage += 'Passwords don\'t match.\n';
-    return errorMessage;
-  }
-
-  void _clearFields() {
-    emailTextEditingController.text = '';
-    passwordTextEditingController.text = '';
-    confirmPasswordTextEditingController.text = '';
+  bool validateConfirmPassword(String? confirmPassword) {
+    if (!validateField(confirmPassword)) {
+      return false;
+    }
+    return passwordTextEditingController.text == confirmPasswordTextEditingController.text;
   }
 
   @override

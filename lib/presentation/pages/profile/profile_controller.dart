@@ -14,6 +14,5 @@ class ProfileController extends GetxController {
 
   void loadedEmail() async {
     email.value = await _preference.getEmail();
-    print(email.value);
   }
 }
