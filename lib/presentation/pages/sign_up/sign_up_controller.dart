@@ -18,11 +18,15 @@ class SignUpController extends GetxController {
     if (_formKey.currentState!.validate()) {
       _preference.saveEmail(emailTextEditingController.text);
       _preference.savePassword(passwordTextEditingController.text);
+      _clearFields();
       Get.back();
     }
   }
 
-  void goToSignIn() => Get.back();
+  void goToSignIn() {
+    _clearFields();
+    Get.back();
+  }
 
   bool validateField(String? field) {
     return field != null && field.isNotEmpty;
@@ -33,6 +37,12 @@ class SignUpController extends GetxController {
       return false;
     }
     return passwordTextEditingController.text == confirmPasswordTextEditingController.text;
+  }
+
+  void _clearFields() {
+    emailTextEditingController.text = '';
+    passwordTextEditingController.text = '';
+    confirmPasswordTextEditingController.text = '';
   }
 
   @override

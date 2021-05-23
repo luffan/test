@@ -17,8 +17,8 @@ class SignInController extends GetxController {
   GlobalKey<FormState> get formKey => _formKey;
 
   void signIn() async {
-    if (_formKey.currentState!.validate() &&
-        (await validatePassword(passwordTextEditingController.text))) {
+    final isValidPass = await validatePassword(passwordTextEditingController.text);
+    if (_formKey.currentState!.validate() && isValidPass) {
       Get.find<ProfileController>().loadedEmail();
       Get.offNamed('/profile');
     }
