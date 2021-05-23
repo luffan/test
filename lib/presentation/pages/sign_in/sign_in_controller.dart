@@ -9,50 +9,35 @@ class SignInController extends GetxController {
   final usernameTextEditingController = TextEditingController();
   final passwordTextEditingController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+  var isValidPass = true.obs;
+
   SignInController(this._preference);
 
+  GlobalKey<FormState> get formKey => _formKey;
+
   void signIn() async {
-    final errorMessage = await _checkFields();
-    if (errorMessage.isEmpty) {
+    if (_formKey.currentState!.validate() &&
+        (await validatePassword(passwordTextEditingController.text))) {
       Get.find<ProfileController>().loadedEmail();
       Get.offNamed('/profile');
-    } else {
-      Get.defaultDialog(
-        title: "Error",
-        middleText: errorMessage,
-      );
-      _clearFields();
     }
   }
 
   void goToSignUp() => Get.toNamed('/signUp');
 
-  bool _validateUsername(String username) {
-    return username.isNotEmpty;
+  bool validateUsername(String? username) {
+    return username != null && username.isNotEmpty;
   }
 
-  Future<bool> _validatePassword(String password) async {
-    if (password.isEmpty) {
-      return false;
+  Future<bool> validatePassword(String? password) async {
+    if (password == null || password.isEmpty) {
+      isValidPass.value = false;
+      return isValidPass.value;
     }
+    isValidPass.value = (await _preference.getPassword()) == password;
 
-    final prefPassword = await _preference.getPassword();
-
-    return prefPassword == password;
-  }
-
-  Future<String> _checkFields() async {
-    var errorMessage = '';
-    final isCorrectUsername = _validateUsername(usernameTextEditingController.text);
-    final isCorrectPassword = await _validatePassword(passwordTextEditingController.text);
-    if (!isCorrectUsername) errorMessage += 'There is no such user name.\n';
-    if (!isCorrectPassword) errorMessage += 'Invalid password.\n';
-    return errorMessage;
-  }
-
-  void _clearFields() {
-    usernameTextEditingController.text = '';
-    passwordTextEditingController.text = '';
+    return isValidPass.value;
   }
 
   @override

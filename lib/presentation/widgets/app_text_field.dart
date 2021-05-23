@@ -6,10 +6,12 @@ import '../theme/theme_extensions.dart';
 class AppTextField extends StatelessWidget {
   final String? hintText;
   final TextEditingController controller;
+  final bool Function(String?) validator;
 
   AppTextField({
     this.hintText,
     required this.controller,
+    required this.validator,
   });
 
   @override
@@ -19,8 +21,9 @@ class AppTextField extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 20),
       color: theme.textFieldBackgroundColor,
-      child: TextField(
+      child: TextFormField(
         controller: controller,
+        validator: (text) => validator(text) ? null : 'Invalid $hintText',
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
